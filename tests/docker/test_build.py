@@ -40,33 +40,6 @@ def test_docker_build(runner, dockerobj):
     )
 
 
-def test_docker_build_reverse_proxy(runner, dockerobj):
-    """Test ntc docker build command."""
-    _helper(
-        runner, dockerobj,
-        cmd=["docker", "--app", "reverse-proxy", "build"],
-        build_output=[{"stream": "hola"}, "hola"],
-        exit_code=0,
-        tag_regex=r"reverse-proxy:[a-f0-9]*-[0-9]*",
-        get_calls=1,
-        app="reverse-proxy",
-        build_args={"ENV": "staging"},
-    )
-
-
-def test_docker_build_dev_webapp(runner, dockerobj):
-    """Test ntc docker build command."""
-    _helper(
-        runner, dockerobj,
-        cmd=["-e", "dev", "docker", "build"],
-        build_output=[{"stream": "hola"}, "hola"],
-        exit_code=0,
-        tag_regex=r"webapp-dev:[a-f0-9]*",
-        get_calls=1,
-        app="webapp",
-    )
-
-
 def test_docker_build_with_dockerfile(runner, dockerobj):
     """Test ntc docker build command."""
     _helper(

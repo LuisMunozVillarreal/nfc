@@ -4,37 +4,38 @@
 import click
 
 
-from .cfg.environments import DEV_ENV, PROD_ENV, STAGING_ENV
-from .cfg.tasks import TASKS_STRS
+from .cfg.apps import APPS
+from .cfg.environments import PROD_ENV, STAGING_ENV
 from .cmds.app import app
 from .cmds.docker import docker
 from .cmds.helm import helm
-from .helpers.tasks import computed_tasks
-from .helpers.config import NtcConfig
+from .helpers.workdir import get_work_dir
 
 
 @click.group()
 @click.pass_context
-@click.option("-e", "--env", default=STAGING_ENV, type=click.Choice(
-    [DEV_ENV, STAGING_ENV, PROD_ENV], case_sensitive=False))
-@click.option("-t", "--tasks", default=["webapp.all"], type=click.Choice(
-    TASKS_STRS, case_sensitive=False), multiple=True)
+@click.option(
+    "-e", "--env", default=STAGING_ENV, type=click.Choice(
+        [STAGING_ENV, PROD_ENV], case_sensitive=False)
+)
+@click.option(
+    "-a", "--apps", default=["backend"], type=click.Choice(
+        APPS, case_sensitive=False), multiple=True,
+)
 @click.option("-v", "--debug", is_flag=True)
-def nutrition_cli(ctx, env, tasks, debug):
+def nutrition_cli(ctx, env, apps, debug):
     """Nutrition CLI.
 
     Args:
         ctx (dict): CLI context.
         env (str): environemnt to work on.
-        tasks (str): tasks to execute.
+        apps (List): apps to action on.
         debug (bool): debug mode.
     """
-    config = NtcConfig()
-
     ctx.obj = {
-        "work_dir": config["DEFAULT"]["WorkDir"],
+        "work_dir": get_work_dir(),
         "env": env,
-        "tasks": computed_tasks(tasks),
+        "apps": apps,
         "debug": debug,
     }
 

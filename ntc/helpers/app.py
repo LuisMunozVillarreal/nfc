@@ -4,7 +4,7 @@ from ntc.cfg.helm import CHARTS_PATH
 
 from ntc.cfg import DEV
 from ntc.cfg.apps import WEBAPP
-from ntc.cfg.environments import DEV_ENV, PROD_ENV
+from ntc.cfg.environments import STAGING_ENV, PROD_ENV
 
 from .chart import Chart
 from .json import Json
@@ -12,7 +12,7 @@ from .tag import generate_tag
 
 
 class App():
-    def __init__(self, name, work_dir, env=DEV_ENV, chart_path=None):
+    def __init__(self, name, work_dir, env=STAGING_ENV, chart_path=None):
         self.__name = name
         self.__work_dir = work_dir
         self.__env = env
@@ -97,7 +97,7 @@ class App():
 
 
 class Nutrition(App):
-    def __init__(self, work_dir, env=DEV_ENV):
+    def __init__(self, work_dir, env=STAGING_ENV):
         super().__init__("nutrition", work_dir, env,
                          os.path.join(work_dir, CHARTS_PATH))
         self.__apps = {}

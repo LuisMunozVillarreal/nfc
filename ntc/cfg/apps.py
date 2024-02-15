@@ -1,10 +1,7 @@
 """Nutrition Apps."""
 
 
-NUTRITION = "nutrition"
-
-API = "api"
-REVERSE_PROXY = "reverse-proxy"
+BACKEND = "backend"
 WEBAPP = "webapp"
 
-APPS = [API, REVERSE_PROXY, WEBAPP]
+APPS = [BACKEND, WEBAPP]

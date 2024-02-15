@@ -2,20 +2,11 @@ import traceback
 
 
 EXPECTED_TASKS = {
-    "api": {
+    "backend": {
         "chart": False,
         "image": False,
-        "dev-image": False,
-    },
-    "nutrition": {
-        "chart": False,
     },
     "webapp": {
-        "chart": False,
-        "image": False,
-        "dev-image": False,
-    },
-    "reverse-proxy": {
         "chart": False,
         "image": False,
     },

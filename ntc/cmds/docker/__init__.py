@@ -6,21 +6,19 @@ import os
 import click
 import docker as dockerpy
 
-from ntc.cfg import BASE, DEV
-from ntc.cfg.apps import WEBAPP
+from ntc.cfg import DEV
+from ntc.cfg.apps import BACKEND
 from ntc.cfg.docker import DOCKER_DIR, DOCKERFILE, REGISTRY
-from ntc.cfg.environments import DEV_ENV
 from ntc.helpers.tag import generate_tag
 
 from .build import build as build_cmd
 from .push import push as push_cmd
-from .start import start as start_cmd
 from .tag import tag as tag_cmd
 
 
 @click.group()
 @click.pass_context
-@click.option("--app", default=WEBAPP)
+@click.option("--app", default=BACKEND)
 @click.option("--tag", help="This option is mainly used for dev images.")
 @click.option("--registry", default=REGISTRY)
 @click.option("--img-type")
@@ -39,12 +37,6 @@ def docker(ctx, app, tag, registry, img_type, **kwargs):
 
     img_name = app
     dockerfile = DOCKERFILE
-    if img_type == BASE:
-        img_name = "{}-{}".format(app, img_type)
-        dockerfile = "{}.{}".format(DOCKERFILE, img_type)
-    elif ctx.obj["env"] == DEV_ENV:
-        img_name = "{}-{}".format(app, DEV)
-        dockerfile = "{}.{}".format(DOCKERFILE, DEV)
 
     ctx.obj["docker"] = {
         "lib": dockerpy.from_env(),
@@ -69,4 +61,3 @@ def docker(ctx, app, tag, registry, img_type, **kwargs):
 docker.add_command(build_cmd)
 docker.add_command(tag_cmd)
 docker.add_command(push_cmd)
-docker.add_command(start_cmd)

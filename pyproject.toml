@@ -3,7 +3,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [project.scripts]
-nfc = "nfc:nutfeex_cli"
+ntc = "ntc:nutfeex_cli"
 
 [tool.bandit]
 exclude_dirs = ["tests", ".tox"]
@@ -31,23 +31,23 @@ exclude = [
 ]
 
 [tool.poetry]
-name = "nfc"
+name = "ntc"
 version = "0.1.0"
-description = "Nutfeex CLI"
+description = "Nutrition CLI"
 authors = ["Luis Muñoz <luis.munoz.villarreal@gmail.com>"]
 packages = [
-    { include = "nfc" },
+    { include = "ntc" },
 ]
 
 
 [tool.poetry.dependencies]
 click = "^8.1.7"
-configobj = "^5.0.8"
 docker = "^7.0.0"
 dockerpty = "^0.4.1"
 gitpython = "^3.1.41"
 pydantic = "^2.6.1"
 python = "^3.11"
+pyyaml = "*"
 sh = "^2.0.6"
 
 [tool.poetry.group.dev.dependencies]

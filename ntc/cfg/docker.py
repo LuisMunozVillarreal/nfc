@@ -1,19 +1,15 @@
 """Nutrition CLI docker config."""
 
 
-from .apps import API, WEBAPP
+from .apps import BACKEND, WEBAPP
 
-REGISTRY = "eu.gcr.io/nutrition"
+REGISTRY = ""
 
 DOCKER_DIR = "platform/docker"
 DOCKERFILE = "Dockerfile"
-DOCKERFILE_DEV = "Dockerfile.dev"
 
-DEV_IMGS = [API, WEBAPP]
+DEV_IMGS = [BACKEND, WEBAPP]
 LATEST = "latest"
 
 ASH = "/bin/ash"
 BASH = "/bin/bash"
-ENV_FILE = ".env.development"
-
-POSTGRES_DATA_DIR = "/var/lib/postgresql/11/main/"

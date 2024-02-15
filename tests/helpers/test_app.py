@@ -21,7 +21,7 @@ def _deps_helper(mock, expected_data):
     inner_mock = list(new_iter[0])[0]
 
     nutrition = Nutrition("some_directory")
-    app = App("reverse-proxy", "some_directory")
+    app = App("backend", "some_directory")
     app.increase_version()
     nutrition.add_app(app)
     nutrition.update_dep_versions()
@@ -61,7 +61,7 @@ def test_update_dep_versions_from_prod(git, time, open_prod_main_chart):
     expected_data = """dependencies:
 - name: traefik
   version: 1.87.2
-- name: reverse-proxy
+- name: backend
   version: 0.1.68
 version: 1.2.39
 """
@@ -72,7 +72,7 @@ def test_update_dep_versions_from_dev(git, time, open_dev_main_chart):
     expected_data = """dependencies:
 - name: traefik
   version: 1.87.2
-- name: reverse-proxy
+- name: backend
   version: 0.1.68-dev-2
 version: 1.2.39-dev-2
 """

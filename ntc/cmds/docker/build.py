@@ -6,7 +6,7 @@ import os
 import click
 import docker as dockerpy
 
-from ntc.cfg.apps import WEBAPP
+from ntc.cfg.apps import BACKEND
 from ntc.cfg.docker import DOCKERFILE
 from ntc.cfg.environments import PROD_ENV, STAGING_ENV
 

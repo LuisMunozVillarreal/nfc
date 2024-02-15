@@ -1,0 +1,31 @@
+version: 2.1
+jobs:
+  validate:
+    docker:
+      - image: python:3.9.2-alpine3.13
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            apk add git
+            pip install -e .[test]
+      - run:
+          name: PyTest
+          command: pytest
+      - run:
+          name: Flake8
+          command: flake8 --tee --count
+      - run:
+          name: PyLint
+          command: pylint ntc setup.py
+      - run:
+          name: PyLint on tests
+          command: pylint --rcfile .pylintrc-tests tests
+
+
+workflows:
+  version: 2
+  Validation_Workflow:
+    jobs:
+      - validate

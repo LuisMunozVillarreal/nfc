@@ -4,22 +4,12 @@
 import pytest
 from click.testing import CliRunner
 
-
 CONTENT = """[DEFAULT]
 WorkDir = /home/nutrition/repos/nutrition/
-
-[staging]
-ApiSecretKey = 1
-CloudflareDnsApiToken = 2
-PostgresqlPassword = 3
-
-[production]
-ApiSecretKey = 4
-CloudflareDnsApiToken = 5
-PostgresqlPassword = 6
 """
 
-@pytest.fixture(name="conf_file")
+
+@pytest.fixture(name="conf_file", autouse=True)
 def conf_file(tmp_path):
     config_dir = tmp_path / "test"
     config_dir.mkdir()

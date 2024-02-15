@@ -13,8 +13,14 @@ line-length = 79
 
 [tool.coverage.run]
 branch = true
-source = "."
-omit = ".tox"
+concurrency = ["multiprocessing"]
+source = ["ntc"]
+
+[tool.coverage.report]
+fail_under = 100
+precision = 3
+show_missing = true
+skip_covered = true
 
 [tool.flake8]
 statistics = true
@@ -23,11 +29,6 @@ exclude = [
     ".git",
     ".tox",
 ]
-
-[tool.coverage.report]
-show_missing = true
-precision = 3
-fail_under = 100
 
 [tool.poetry]
 name = "nfc"
@@ -88,7 +89,7 @@ disable = "model-no-explicit-unicode"
 [tool.pytest.ini_options]
 addopts = [
     "--cov",
-    "--cov-report term",
+#    "--cov-report term",
     "--no-cov-on-fail",
     "--strict-markers",
     "-Werror",

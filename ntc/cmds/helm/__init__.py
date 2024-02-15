@@ -5,15 +5,12 @@ import os
 
 import click
 
-from ntc.cfg.apps import TRAKTION, WEBAPP
+from ntc.cfg.apps import NUTRITION, WEBAPP
 from ntc.cfg.helm import CHARTS_PATH
 from ntc.helpers.cmd import Command
 from ntc.helpers.kubectl import get_namespace
 
 from .dependency import dependency as dependency_cmd
-from .install import install as install_cmd
-from .uninstall import uninstall as uninstall_cmd
-from .upgrade import upgrade as upgrade_cmd
 
 
 @click.group()
@@ -29,7 +26,7 @@ def helm(ctx, app, **kwargs):
         kwargs (dict): named arguments
     """
     chart_path = os.path.join(ctx.obj["work_dir"], app, CHARTS_PATH)
-    if app == TRAKTION:
+    if app == NUTRITION:
         chart_path = os.path.join(ctx.obj["work_dir"], CHARTS_PATH)
 
     ctx.obj["helm"] = {
@@ -43,6 +40,3 @@ def helm(ctx, app, **kwargs):
 
 
 helm.add_command(dependency_cmd)
-helm.add_command(install_cmd)
-helm.add_command(uninstall_cmd)
-helm.add_command(upgrade_cmd)

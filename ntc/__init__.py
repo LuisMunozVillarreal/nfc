@@ -7,11 +7,8 @@ import click
 from .cfg.environments import DEV_ENV, PROD_ENV, STAGING_ENV
 from .cfg.tasks import TASKS_STRS
 from .cmds.app import app
-from .cmds.cloud import cloud
-from .cmds.dev import dev
 from .cmds.docker import docker
 from .cmds.helm import helm
-from .cmds.kubectl import kubectl
 from .helpers.tasks import computed_tasks
 from .helpers.config import NtcConfig
 
@@ -36,7 +33,6 @@ def nutrition_cli(ctx, env, tasks, debug):
 
     ctx.obj = {
         "work_dir": config["DEFAULT"]["WorkDir"],
-        "conf": config[env],
         "env": env,
         "tasks": computed_tasks(tasks),
         "debug": debug,
@@ -44,8 +40,5 @@ def nutrition_cli(ctx, env, tasks, debug):
 
 
 nutrition_cli.add_command(app)
-nutrition_cli.add_command(cloud)
-nutrition_cli.add_command(dev)
 nutrition_cli.add_command(docker)
-nutrition_cli.add_command(kubectl)
 nutrition_cli.add_command(helm)

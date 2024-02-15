@@ -1,4 +1,4 @@
-"""tk helm upgrade command module."""
+"""ntc helm upgrade command module."""
 
 
 import os
@@ -7,9 +7,9 @@ import sys
 import click
 import sh
 
-from tk.cfg.helm import MAIN_CHART, PRODUCTION_VALUES_FILE
-from tk.cfg.namespaces import PROD_NAMESPACE
-from tk.helpers.helm import get_set_opts
+from ntc.cfg.helm import MAIN_CHART, PRODUCTION_VALUES_FILE
+from ntc.cfg.namespaces import PROD_NAMESPACE
+from ntc.helpers.helm import get_set_opts
 
 
 @click.command()

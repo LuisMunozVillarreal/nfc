@@ -1,14 +1,14 @@
-"""tk helm command package."""
+"""ntc helm command package."""
 
 
 import os
 
 import click
 
-from tk.cfg.apps import TRAKTION, WEBAPP
-from tk.cfg.helm import CHARTS_PATH
-from tk.helpers.cmd import Command
-from tk.helpers.kubectl import get_namespace
+from ntc.cfg.apps import TRAKTION, WEBAPP
+from ntc.cfg.helm import CHARTS_PATH
+from ntc.helpers.cmd import Command
+from ntc.helpers.kubectl import get_namespace
 
 from .dependency import dependency as dependency_cmd
 from .install import install as install_cmd

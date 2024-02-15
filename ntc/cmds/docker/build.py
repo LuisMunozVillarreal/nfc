@@ -1,4 +1,4 @@
-"""tk docker build command module."""
+"""ntc docker build command module."""
 
 
 import os

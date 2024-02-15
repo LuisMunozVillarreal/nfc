@@ -1,8 +1,8 @@
 import click
 
-from tk.cfg.helm import MAIN_CHART
-from tk.helpers.helm import get_set_opts
-from tk.helpers.kubectl import get_namespace
+from ntc.cfg.helm import MAIN_CHART
+from ntc.helpers.helm import get_set_opts
+from ntc.helpers.kubectl import get_namespace
 
 
 @click.command()

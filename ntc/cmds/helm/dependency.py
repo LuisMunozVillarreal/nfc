@@ -1,4 +1,4 @@
-"""tk helm dependency command module."""
+"""ntc helm dependency command module."""
 
 
 import os

@@ -4,10 +4,10 @@
 import click
 import docker as dockerpy
 
-from ntc.cfg.apps import TRAKTION
+from ntc.cfg.apps import NUTRITION
 from ntc.cfg.helm import CHART_WITH_DEPS
 from ntc.cfg.tasks import CHART, IMAGE
-from ntc.helpers.app import App, Traktion
+from ntc.helpers.app import App, Nutrition
 
 from ..docker import docker
 from ..docker.build import build
@@ -32,10 +32,10 @@ def upgrade(ctx, cluster, set_opt):
         ctx (dict): CLI context.
     """
     click.echo("Upgrade...")
-    nutrition = Traktion(ctx.obj["work_dir"], ctx.obj["env"])
+    nutrition = Nutrition(ctx.obj["work_dir"], ctx.obj["env"])
 
     for app in ctx.obj["tasks"].keys():
-        if app == TRAKTION or \
+        if app == NUTRITION or \
            not ctx.obj["tasks"][app][IMAGE] and \
            not ctx.obj["tasks"][app][CHART]:
             continue
@@ -63,7 +63,7 @@ def upgrade(ctx, cluster, set_opt):
                 ctx.forward(helm, app=app)
                 ctx.forward(dep_update)
 
-    if ctx.obj["tasks"][TRAKTION][CHART]:
+    if ctx.obj["tasks"][NUTRITION][CHART]:
         # Update main chart
         nutrition.update_dep_versions()
         nutrition.increase_chart_version()
@@ -71,6 +71,6 @@ def upgrade(ctx, cluster, set_opt):
         # Execute upgrade
         ctx.forward(kubectl)
         ctx.forward(use_context, cluster=cluster)
-        ctx.forward(helm, app=TRAKTION)
+        ctx.forward(helm, app=NUTRITION)
         ctx.forward(dep_update)
         ctx.forward(helm_upgrade, set_opt=set_opt)

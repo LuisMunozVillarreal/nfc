@@ -1,6 +1,5 @@
 """Nutrition Apps."""
 
-
 BACKEND = "backend"
 WEBAPP = "webapp"
 

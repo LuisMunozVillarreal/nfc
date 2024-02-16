@@ -1,6 +1,5 @@
 """Test config for Nutrition CLI."""
 
-
 import pytest
 from click.testing import CliRunner
 
@@ -35,7 +34,7 @@ def time(mocker):
 
 
 @pytest.fixture
-def docker_mock(mocker, git):
+def dockerobj(mocker, git):
     """Docker mock."""
     return mocker.patch("docker.from_env")
 
@@ -58,8 +57,7 @@ def open_prod_app_chart(mocker, os_fsync):
     appVersion: 0.1.70
     version: 0.1.68
     """
-    return mocker.mock_open(
-        mocker.patch("ntc.helpers.chart.open"), data)
+    return mocker.mock_open(mocker.patch("ntc.helpers.chart.open"), data)
 
 
 @pytest.fixture
@@ -69,8 +67,7 @@ def open_dev_app_chart(mocker, os_fsync):
     appVersion: 0.1.70-dev-1-adfab93-1614735144
     version: 0.1.68-dev-2
     """
-    return mocker.mock_open(
-        mocker.patch("ntc.helpers.chart.open"), data)
+    return mocker.mock_open(mocker.patch("ntc.helpers.chart.open"), data)
 
 
 @pytest.fixture
@@ -118,8 +115,7 @@ def open_env(mocker):
       HOLA=hola
       ADIOS=adios
     """
-    return mocker.mock_open(
-        mocker.patch("ntc.cmds.docker.start.open"), data)
+    return mocker.mock_open(mocker.patch("ntc.cmds.docker.start.open"), data)
 
 
 @pytest.fixture

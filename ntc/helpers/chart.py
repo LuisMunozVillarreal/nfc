@@ -1,13 +1,12 @@
 """ntc helper module for Chart files."""
 
-
 import os
 
 from ntc.cfg.helm import CHART_FILE
 import yaml
 
 
-class Chart():
+class Chart:
     def __init__(self, chart_path):
         self.__chart_file = open(os.path.join(chart_path, CHART_FILE), "r+")
         self.__chart_content = yaml.safe_load(self.__chart_file)

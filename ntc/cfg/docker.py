@@ -1,6 +1,5 @@
 """Nutrition CLI docker config."""
 
-
 from .apps import BACKEND, WEBAPP
 
 REGISTRY = ""

@@ -1,12 +1,8 @@
 """ntc dev command module."""
 
-
 import click
 
 from ntc.helpers.app import App, Nutrition
-
-from .helm import helm
-from .helm.dependency import update as dep_update
 
 
 @click.group()
@@ -38,4 +34,3 @@ def increase_version(ctx, fix):
     # Update main chart
     nutrition.update_dep_versions()
     nutrition.increase_chart_version(False)
-

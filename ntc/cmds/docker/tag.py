@@ -1,6 +1,5 @@
 """ntc docker tag command module."""
 
-
 import os
 
 import click
@@ -21,8 +20,9 @@ def tag(ctx, **kwargs):
     click.echo("Tagging {} docker image...".format(app["name"]))
 
     img = ctx.obj["docker"]["lib"].images.get(app["image"]["name"])
-    res = img.tag(os.path.join(
-        ctx.obj["docker"]["registry"], app["image"]["name"]))
+    res = img.tag(
+        os.path.join(ctx.obj["docker"]["registry"], app["image"]["name"])
+    )
 
     if res:
         click.echo("Tagged with {}".format(app["image"]["name"]))

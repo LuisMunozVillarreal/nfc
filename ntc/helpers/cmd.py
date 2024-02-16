@@ -4,7 +4,7 @@ import click
 import sh
 
 
-class Command():
+class Command:
     def __init__(self, cmd, debug):
         self.__cmd = sh.Command(cmd)
         self.__name = cmd
@@ -16,7 +16,8 @@ class Command():
             if kwargs:
                 kwargs_str = " ".join(kwargs.values())
             msg = "debug: executed cmd: {} {} {}".format(
-                self.__name, " ".join(args), kwargs_str)
+                self.__name, " ".join(args), kwargs_str
+            )
             click.echo(msg)
 
         self.__cmd(*args, _out=sys.stdout, _err=sys.stderr, **kwargs)

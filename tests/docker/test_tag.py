@@ -1,6 +1,5 @@
 """Tests for ntc docker tag command."""
 
-
 from tests import assert_exit_code
 from ntc import nutrition_cli
 

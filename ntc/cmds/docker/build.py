@@ -1,6 +1,5 @@
 """ntc docker build command module."""
 
-
 import os
 
 import click
@@ -62,4 +61,5 @@ def build(ctx, dockerfile, **kwargs):
         img.tag(app["image"]["latest"])
     else:
         raise dockerpy.errors.DockerException(
-            "Docker build failed\n{}".format(error))
+            "Docker build failed\n{}".format(error)
+        )

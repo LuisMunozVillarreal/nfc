@@ -11,7 +11,7 @@ from .json import Json
 from .tag import generate_tag
 
 
-class App():
+class App:
     def __init__(self, name, work_dir, env=STAGING_ENV, chart_path=None):
         self.__name = name
         self.__work_dir = work_dir
@@ -58,7 +58,8 @@ class App():
 
     def __next_app_version(self, fix):
         self._chart.app_version = self.__next_version(
-            self._chart.app_version, fix)
+            self._chart.app_version, fix
+        )
 
     def __next_chart_version(self):
         self._chart.version = self.__next_version(self._chart.version)
@@ -72,7 +73,8 @@ class App():
             dev_build = self.__next_dev_build(self.app_version)
             stable_part = self.app_version.split("-")[0]
             self._chart.app_version = "{}-dev-{}-{}".format(
-                stable_part, dev_build, tag)
+                stable_part, dev_build, tag
+            )
         else:
             self.__next_app_version(fix)
 
@@ -98,14 +100,16 @@ class App():
 
 class Nutrition(App):
     def __init__(self, work_dir, env=STAGING_ENV):
-        super().__init__("nutrition", work_dir, env,
-                         os.path.join(work_dir, CHARTS_PATH))
+        super().__init__(
+            "nutrition", work_dir, env, os.path.join(work_dir, CHARTS_PATH)
+        )
         self.__apps = {}
 
     @property
     def app_version(self):
         raise NotImplementedError(
-            "Nutrition main chart doesn't have appVersion")
+            "Nutrition main chart doesn't have appVersion"
+        )
 
     def add_app(self, app):
         self.__apps[app.name] = app

@@ -1,6 +1,5 @@
 """ntc docker push command module."""
 
-
 import click
 import docker as dockerpy
 
@@ -20,14 +19,20 @@ def push(ctx, **kwargs):
     """
     app = ctx.obj["docker"]["app"]
 
-    click.echo("Pushing {} docker image to {}...".format(
-        app["name"], app["repository"]["path"]))
+    click.echo(
+        "Pushing {} docker image to {}...".format(
+            app["name"], app["repository"]["path"]
+        )
+    )
 
     success = True
     error = None
     for line in ctx.obj["docker"]["lib"].images.push(
-            app["repository"]["path"], tag=app["image"]["tag"],
-            stream=True, decode=True):
+        app["repository"]["path"],
+        tag=app["image"]["tag"],
+        stream=True,
+        decode=True,
+    ):
         if "stream" in line:
             line = line["status"]
         elif "errorDetail" in line:
@@ -38,4 +43,5 @@ def push(ctx, **kwargs):
 
     if not success:
         raise dockerpy.errors.DockerException(
-            "Docker push failed\n{}".format(error))
+            "Docker push failed\n{}".format(error)
+        )

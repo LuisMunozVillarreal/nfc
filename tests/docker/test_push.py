@@ -1,6 +1,5 @@
 """Tests for ntc docker push command."""
 
-
 from tests import assert_exit_code
 from ntc import nutrition_cli
 

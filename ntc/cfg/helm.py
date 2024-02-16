@@ -1,6 +1,5 @@
 """Nutrition CLI helm config."""
 
-
 from .apps import BACKEND
 
 CHARTS_PATH = "platform/kube"

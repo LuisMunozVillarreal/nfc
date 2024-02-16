@@ -1,6 +1,5 @@
 """ntc docker command package."""
 
-
 import os
 
 import click

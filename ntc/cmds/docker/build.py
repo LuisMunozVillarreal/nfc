@@ -31,11 +31,9 @@ def build(ctx, dockerfile, **kwargs):
     if not dockerfile:
         dockerfile = DOCKERFILE
 
-    build_args = None
+    build_args = {"ENV": STAGING_ENV}
     if ctx.obj["env"] == PROD_ENV:
         build_args = {"ENV": PROD_ENV}
-    elif ctx.obj["env"] == STAGING_ENV:
-        build_args = {"ENV": STAGING_ENV}
 
     generator = ctx.obj["docker"]["lib"].api.build(
         path=app["build_context"],

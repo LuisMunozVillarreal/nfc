@@ -2,10 +2,9 @@
 
 import click
 
-
 from .cfg.apps import APPS
 from .cfg.environments import PROD_ENV, STAGING_ENV
-from .cmds.app import app
+from .cmds.cloud import cloud
 from .cmds.docker import docker
 from .helpers.workdir import get_work_dir
 
@@ -43,5 +42,5 @@ def nutrition_cli(ctx, env, apps, debug):
     }
 
 
-nutrition_cli.add_command(app)
+nutrition_cli.add_command(cloud)
 nutrition_cli.add_command(docker)

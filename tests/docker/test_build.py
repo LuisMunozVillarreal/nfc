@@ -1,6 +1,5 @@
 """Tests for ntc docker build command."""
 
-
 import re
 
 from tests import assert_exit_code

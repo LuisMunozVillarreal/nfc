@@ -30,7 +30,7 @@ def git(mocker):
 def time(mocker):
     """Time mock."""
     mock = mocker.patch("ntc.helpers.tag.time.time")
-    mock.return_value = "1614735144"
+    mock.return_value = 1614735144
 
 
 @pytest.fixture
@@ -47,39 +47,39 @@ def dockerpty(mocker):
 
 @pytest.fixture
 def os_fsync(mocker):
-    return mocker.patch("ntc.helpers.chart.os.fsync")
+    return mocker.patch("ntc.helpers.yaml.os.fsync")
 
 
 @pytest.fixture
 def open_prod_app_chart(mocker, os_fsync):
-    """Open mock."""
     data = """
-    appVersion: 0.1.70
-    version: 0.1.68
+        appVersion: 0.1.70
+        version: 0.1.68
     """
-    return mocker.mock_open(mocker.patch("ntc.helpers.chart.open"), data)
+    return mocker.mock_open(mocker.patch("ntc.helpers.yaml.open"), data)
 
 
 @pytest.fixture
-def open_dev_app_chart(mocker, os_fsync):
-    """Open mock."""
+def open_staging_app_chart(mocker, os_fsync):
     data = """
-    appVersion: 0.1.70-dev-1-adfab93-1614735144
-    version: 0.1.68-dev-2
+        appVersion: 0.1.70+dev-adfab93-1614735144
+        version: 0.1.68+dev-adfab93-1614735144
     """
-    return mocker.mock_open(mocker.patch("ntc.helpers.chart.open"), data)
+    return mocker.mock_open(mocker.patch("ntc.helpers.yaml.open"), data)
 
 
 @pytest.fixture
-def open_prod_main_chart(mocker, open_prod_app_chart):
-    """Open mock."""
+def open_package_json(mocker, os_fsync):
+    data = """{ "version": "0.1.68" }"""
+    return mocker.mock_open(mocker.patch("ntc.helpers.json.open"), data)
+
+
+@pytest.fixture
+def open_prod_helmfile(mocker, open_prod_app_chart):
     data = """
-    version: 1.2.39
-    dependencies:
-      - name: traefik
-        version: 1.87.2
-      - name: reverse-proxy
-        version: 0.1.70
+        releases:
+          - name: backend
+            version: 0.1.68
     """
     handlers = [
         mocker.mock_open(read_data=data).return_value,
@@ -90,30 +90,26 @@ def open_prod_main_chart(mocker, open_prod_app_chart):
 
 
 @pytest.fixture
-def open_dev_main_chart(mocker, open_dev_app_chart):
-    """Open mock."""
+def open_staging_helmfile(mocker, open_staging_app_chart):
     data = """
-    version: 1.2.39-dev-2
-    dependencies:
-      - name: traefik
-        version: 1.87.2
-      - name: reverse-proxy
-        version: 0.1.70-dev-3-adfab93-1614735144
+        releases:
+          - name: backend
+            version: 0.1.68+dev-adfab93-1614735144
     """
     handlers = [
         mocker.mock_open(read_data=data).return_value,
-        open_dev_app_chart.return_value,
+        open_staging_app_chart.return_value,
     ]
-    open_dev_app_chart.side_effect = handlers
-    return open_dev_app_chart
+    open_staging_app_chart.side_effect = handlers
+    return open_staging_app_chart
 
 
 @pytest.fixture
 def open_env(mocker):
     """Open mock."""
     data = """
-      HOLA=hola
-      ADIOS=adios
+        HOLA=hola
+        ADIOS=adios
     """
     return mocker.mock_open(mocker.patch("ntc.cmds.docker.start.open"), data)
 
